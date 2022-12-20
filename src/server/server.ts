@@ -1,7 +1,6 @@
-
 // import packages
 import express from 'express';
-// import cookieParser from 'cookie-parser';
+import { Request, Response, NextFunction } from 'express'; 
 import router from './routes';
 import path from 'path';
 // initialize server
@@ -11,11 +10,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // start cookieParser
 // app.use(cookieParser());
+/// serve static 
+app.use('/', express.static(path.join(__dirname, '../client')));
 // assert router
 app.use('/', router);
 
 // Express global error handler
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,

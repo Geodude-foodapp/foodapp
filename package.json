@@ -4,8 +4,8 @@
   "description": "An app for finding recipes that meet your dietary restrictions.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "ts-node server/server.ts",
-    "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"cross-env NODE_ENV=development nodemon server/server.ts\"",
+    "start": "ts-node src/server/server.ts",
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open\" \"cross-env NODE_ENV=development nodemon src/server/server.ts\"",
     "test": "jest",
     "watch": "jest --watch"
   },

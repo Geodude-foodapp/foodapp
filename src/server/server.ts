@@ -1,6 +1,6 @@
 // import packages
 import express from 'express';
-import { Request, Response, NextFunction } from 'express'; 
+import { Request, Response, NextFunction } from 'express';
 import router from './routes';
 import path from 'path';
 // initialize server
@@ -10,10 +10,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // start cookieParser
 // app.use(cookieParser());
-/// serve static 
-app.use('/', express.static(path.join(__dirname, '../client')));
+/// serve static
+app.use('/', express.static(path.join(__dirname, '../../build')));
 // assert router
-app.use('/', router);
+app.use('/api', router);
 
 // Express global error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -28,7 +28,9 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 // unknown requests
-app.use('*', (req, res) => res.status(404).send('Error 404: No content found'));
+app.use('*', (req, res) =>
+  res.status(404).send('Our Error 404: No content found')
+);
 
 // start server
 const PORT = 3000;

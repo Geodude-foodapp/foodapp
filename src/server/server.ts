@@ -4,6 +4,11 @@ import { Request, Response, NextFunction } from 'express';
 import router from './routes';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import postgres from 'postgres';
+import * as dotenv from 'dotenv';
+dotenv.config();
+// instantiate new sql instance - connections are made lazily
+export const sql = postgres(process.env.PG_URI as string);
 // initialize server
 const app = express();
 // handle json reqs and forms

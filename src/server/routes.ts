@@ -2,7 +2,7 @@ import express from 'express';
 // Import all controllers
 import userController from './controllers/userController';
 import favsController from './controllers/favsController';
-import cookieController from './controllers/cookieController';
+import cookieController from './controllers/authController';
 // Initialize an express router
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { Pool } from 'pg';
 import bcrypt from 'bcrypt';
-
+/// import db from '';
 
 type UserController = {
   loginUser: RequestHandler;

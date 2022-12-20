@@ -3,13 +3,14 @@ import express from 'express';
 import { Request, Response, NextFunction } from 'express';
 import router from './routes';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 // initialize server
 const app = express();
 // handle json reqs and forms
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // start cookieParser
-// app.use(cookieParser());
+app.use(cookieParser());
 /// serve static
 app.use('/', express.static(path.join(__dirname, '../../build')));
 // assert router

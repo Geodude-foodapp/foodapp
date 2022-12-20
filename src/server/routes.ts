@@ -6,8 +6,12 @@ import cookieController from './controllers/cookieController';
 // Initialize an express router
 const router = express.Router();
 
-// login and sign up post
+// login post
 router.post('/login', /* middelware */(req, res) => {
+  return res.status(200).send();
+});
+// signup route
+router.post('/signup', (req, res) => {
   return res.status(200).send();
 });
 // favorites get

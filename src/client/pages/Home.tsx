@@ -3,9 +3,9 @@ import RecipeCard from '../components/RecipeCard';
 
 export default () => {
   const [favorites, setFavorites] = useState([1, 2, 3]);
-  const [isUserDataFetched, setUserDataFetched];
+  // const [isUserDataFetched, setUserDataFetched];
   // TODO: fetch recipe data
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const recipeCards = favorites.map((el) => <RecipeCard key={el} />);
 

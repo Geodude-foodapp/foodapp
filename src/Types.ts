@@ -30,6 +30,5 @@ export type UserFormState = {
   password: string;
   // TODO: ADD RESTRICTIONS AND OTHER PROFILE INFO
   diet?: Diet;
-  intolerance?: Intolerance[];
-  exclusion?: string[];
+  intolerance: { [key in Intolerance]: boolean };
 };

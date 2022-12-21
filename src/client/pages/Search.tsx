@@ -76,7 +76,8 @@ export default ({ userData }: SearchProps) => {
       >
         <h1>Narrow down your search</h1>
         <p>Please fill out at least one search field</p>
-
+        <div className='settings-inputs'>
+          <div>
         <label htmlFor='cuisine'>Choose a cuisine</label>
         <select
           name='cuisine'
@@ -89,7 +90,8 @@ export default ({ userData }: SearchProps) => {
           <option value='Any'>Any</option>
           {cuisineOptions}
         </select>
-
+        </div>
+        <div>
         <label htmlFor='meal-type'>Choose a meal type</label>
         <select
           name='meal-type'
@@ -102,7 +104,8 @@ export default ({ userData }: SearchProps) => {
           <option value='Any'>Any</option>
           {mealTypeOptions}
         </select>
-
+        </div>
+        <div>
         <label htmlFor='max-time'>
           Enter the maximum time in minutes it should take to prepare and cook
           the recipe
@@ -118,6 +121,8 @@ export default ({ userData }: SearchProps) => {
             setFormData((state) => ({ ...state, maxTime: e.target.value }))
           }
         />
+        </div>
+        </div>
         <button>Submit</button>
         {isInputInvalid && <p>Must fill out at least one search field</p>}
       </form>

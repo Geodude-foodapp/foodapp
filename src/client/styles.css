@@ -136,3 +136,17 @@ button:hover {
   box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
   background-color: rgb(251, 251, 251);
 }
+
+#search {
+  display: block;
+  padding: 2rem;
+  width: 60%;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
+  background-color: rgb(251, 251, 251);
+}
+
+.settings-inputs{
+  display: flex;
+}

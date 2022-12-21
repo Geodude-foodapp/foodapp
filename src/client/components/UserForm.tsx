@@ -20,10 +20,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
     <section id='user-form'>
       <h2>{`${type} Form`}</h2>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit(formData);
-        }}
+        onSubmit={handleSubmit}
       >
         <input
           type='text'

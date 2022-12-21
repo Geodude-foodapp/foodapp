@@ -6,8 +6,15 @@ import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
 import Search from './pages/Search';
 import Navbar from './components/Navbar';
+import { UserData } from '../Types';
+import { intoleranceObj } from './utils/objs';
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [userData, setUserData] = useState<UserData>({
+    name: '',
+    intolerance: intoleranceObj,
+  });
 
   useEffect(() => {
     // TODO: make fetch request to check if logged in
@@ -43,7 +50,7 @@ export default function App() {
         <Route
           path='/'
           // element={isLoggedIn ? <Home /> : <SignUp />}
-          element={<Home />}
+          element={<Home setUserData={(data: UserData) => setUserData(data)} />}
         />
         <Route
           path='/signup'
@@ -62,6 +69,7 @@ export default function App() {
           element={<Search />}
         />
       </Routes>
+
       <Navbar />
     </>
   );

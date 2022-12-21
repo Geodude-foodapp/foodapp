@@ -1,20 +1,73 @@
 import React, { useState } from 'react';
 import { UserFormState } from '../../Types';
-import { useNavigate } from 'react-router-dom';
+import { dietArr, intoleranceArr } from '../utils/arrs';
+import { intoleranceObj } from '../utils/objs';
 
 type UserFormProps = {
   type: 'Sign Up' | 'Log In';
-  handleSubmit: () => void;
+  handleSubmit: (formData: UserFormState) => void;
 };
 
 export default ({ type, handleSubmit }: UserFormProps) => {
   const initialFormState: UserFormState = {
     name: '',
     password: '',
+    intolerance: intoleranceObj,
   };
 
-  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormState);
+
+  // If type is Log In, don't waste time populating dietInputs and intoleranceInputs
+  let dietInputs, intoleranceInputs;
+  if (type === 'Sign Up') {
+    dietInputs = dietArr.map((diet) => (
+      <div key={`${diet}-container`}>
+        <input
+          type='checkbox'
+          key={diet}
+          name={diet}
+          id={`${diet}-diet`}
+          value={diet}
+          checked={formData.diet === diet}
+          onChange={() => setFormData((state) => ({ ...state, diet }))}
+        />
+        <label
+          key={`${diet}-label`}
+          htmlFor={`${diet}-diet`}
+        >
+          {diet}
+        </label>
+      </div>
+    ));
+
+    intoleranceInputs = intoleranceArr.map((intol) => (
+      <div key={`${intol}-container`}>
+        <input
+          type='checkbox'
+          key={intol}
+          name={intol}
+          id={intol}
+          value={intol}
+          checked={formData.intolerance[intol]}
+          onChange={() =>
+            setFormData((state) => ({
+              ...state,
+              intolerance: {
+                ...state.intolerance,
+                [intol]: !state.intolerance[intol],
+              },
+            }))
+          }
+        />
+        <label
+          key={`${intol}-label`}
+          htmlFor={intol}
+        >
+          {intol}
+        </label>
+      </div>
+    ));
+  }
 
   return (
     <section id='user-form'>
@@ -25,75 +78,48 @@ export default ({ type, handleSubmit }: UserFormProps) => {
         <input
           type='text'
           placeholder='username'
+          required
           value={formData.name}
           onChange={(e) =>
-            setFormData((state) => ({ ...state, username: e.target.value }))
+            setFormData((state) => ({ ...state, name: e.target.value }))
           }
         />
         <input
           type='password'
           placeholder='password'
+          required
+          minLength={8}
           value={formData.password}
           onChange={(e) =>
             setFormData((state) => ({ ...state, password: e.target.value }))
           }
         />
+
+        {/* SIGNUP-SPECIFIC INPUTS */}
         {type === 'Sign Up' && (
           <>
             <div className='diet-checkboxes'>
               <legend>Select your diet:</legend>
+              {dietInputs}
               <input
                 type='checkbox'
-                name='diet'
-                id='vegan'
-                value='vegan'
+                name='none'
+                id='none-diet'
+                value='none'
+                checked={!formData.diet}
+                onChange={() =>
+                  setFormData((state) => {
+                    delete state.diet;
+                    return { ...state };
+                  })
+                }
               />
-              <label htmlFor='vegan'>vegan</label>
-              <input
-                type='checkbox'
-                name='diet'
-                id='vegetarian'
-                value='vegetarian'
-              />
-              <label htmlFor='vegetarian'>vegetarian</label>
-              <input
-                type='checkbox'
-                name='diet'
-                id='gluten free'
-                value='gluten free'
-              />
-              <label htmlFor='gluten free'>gluten free</label>
+              <label htmlFor='none-diet'>None</label>
             </div>
+
             <div className='intolerances-checkboxes'>
               <legend>Select your intolerances:</legend>
-              <input
-                type='checkbox'
-                name='intolerances'
-                id='dairy'
-                value='dairy'
-              />
-              <label htmlFor='dairy'>dairy</label>
-              <input
-                type='checkbox'
-                name='intolerances'
-                id='eggs'
-                value='eggs'
-              />
-              <label htmlFor='eggs'>eggs</label>
-              <input
-                type='checkbox'
-                name='intolerances'
-                id='gluten'
-                value='gluten'
-              />
-              <label htmlFor='gluten'>gluten</label>
-              <input
-                type='checkbox'
-                name='intolerances'
-                id='grain'
-                value='grain'
-              />
-              <label htmlFor='grain'>grain</label>
+              {intoleranceInputs}
             </div>
           </>
         )}

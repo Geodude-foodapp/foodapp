@@ -30,6 +30,18 @@ export type UserFormState = {
   password: string;
   // TODO: ADD RESTRICTIONS AND OTHER PROFILE INFO
   diet?: Diet;
-  intolerance?: Intolerance[];
-  exclusion?: string[];
+  intolerance: { [key in Intolerance]: boolean };
+};
+
+export type RecipeData = {
+  id: number;
+  title: string;
+  image: string;
+  sourceurl: string;
+};
+
+export type UserData = {
+  name: string;
+  diet?: Diet;
+  intolerance: { [key in Intolerance]: boolean };
 };

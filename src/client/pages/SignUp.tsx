@@ -1,29 +1,14 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import UserForm from '../components/UserForm';
-import { UserFormState } from '../../Types';
-import { useNavigate } from 'react-router-dom';
 
 export default () => {
-  const signUp = (formData: UserFormState) => {
-    axios
-      .post('/api/signup', formData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const navigate = useNavigate()
-
   return (
     <section id='signup'>
-      <UserForm
-        type='Sign Up'
-        handleSubmit={signUp}
-      />
+      <UserForm formMode='Sign Up' />
+      <p>
+        Already have an account? <Link to='/login'>Log in</Link>{' '}
+      </p>
     </section>
   );
 };

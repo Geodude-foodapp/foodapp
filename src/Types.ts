@@ -40,8 +40,24 @@ export type RecipeData = {
   sourceurl: string;
 };
 
+export type FavoriteData = {
+  id: number;
+  title: string;
+  image: string;
+  sourceurl: string;
+};
+
+// UserData state stored in App.tsx
 export type UserData = {
   name: string;
   diet?: Diet;
   intolerance: { [key in Intolerance]: boolean };
+  favorites: FavoriteData[];
+};
+
+export type BackendUserFormState = {
+  name: string;
+  password: string;
+  diet?: Diet;
+  intolerance: string;
 };

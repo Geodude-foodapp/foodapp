@@ -7,13 +7,14 @@ import SignUp from './pages/SignUp';
 import Search from './pages/Search';
 import Navbar from './components/Navbar';
 import { UserData } from '../Types';
-import { intoleranceObj } from './utils/objs';
+import { intoleranceObj } from './utils/dataObjects';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [userData, setUserData] = useState<UserData>({
     name: '',
     intolerance: intoleranceObj,
+    favorites: [],
   });
 
   useEffect(() => {

@@ -1,25 +1,53 @@
 import React, { useState } from 'react';
-import { UserFormState } from '../../Types';
-import { dietArr, intoleranceArr } from '../utils/arrs';
-import { intoleranceObj } from '../utils/objs';
+import axios from 'axios';
+import { useNavigate } from 'react-router';
+import { UserFormState, BackendUserFormState } from '../../Types';
+import { dietArr, intoleranceArr } from '../utils/dataObjects';
+import { intoleranceObj } from '../utils/dataObjects';
 
 type UserFormProps = {
-  type: 'Sign Up' | 'Log In';
-  handleSubmit: (formData: UserFormState) => void;
+  formMode: 'Sign Up' | 'Log In';
 };
 
-export default ({ type, handleSubmit }: UserFormProps) => {
+export default ({ formMode }: UserFormProps) => {
   const initialFormState: UserFormState = {
     name: '',
     password: '',
     intolerance: intoleranceObj,
   };
-
   const [formData, setFormData] = useState(initialFormState);
+  const [attemptFailed, setAttemptFailed] = useState(false);
 
-  // If type is Log In, don't waste time populating dietInputs and intoleranceInputs
+  const navigate = useNavigate();
+
+  const handleSubmit = (formData: UserFormState): void => {
+    const endpoint = formMode === 'Log In' ? 'login' : 'signup';
+
+    let signUpData;
+    if (formMode === 'Sign Up') {
+      // Stringify intolerances to facilitate working with current SQL setup
+      const intoleranceString = Object.values(formData.intolerance).join(',');
+      signUpData = {
+        ...formData,
+        intolerance: intoleranceString,
+      } as BackendUserFormState;
+    }
+
+    const postData = formMode === 'Log In' ? formData : signUpData;
+    axios
+      .post(`/api/${endpoint}`, postData)
+      .then(({ data }) => {
+        if (!data.auth) return setAttemptFailed(true);
+        else navigate('/');
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  // If formMode is Log In, don't waste time populating dietInputs and intoleranceInputs
   let dietInputs, intoleranceInputs;
-  if (type === 'Sign Up') {
+  if (formMode === 'Sign Up') {
     dietInputs = dietArr.map((diet) => (
       <div key={`${diet}-container`}>
         <input
@@ -71,7 +99,8 @@ export default ({ type, handleSubmit }: UserFormProps) => {
 
   return (
     <section id='user-form'>
-      <h2>{`${type} Form`}</h2>
+      <h2>{`${formMode} Form`}</h2>
+      {attemptFailed && <p>{formMode} attempt failed. Please try again.</p>}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -99,7 +128,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
         />
 
         {/* SIGNUP-SPECIFIC INPUTS */}
-        {type === 'Sign Up' && (
+        {formMode === 'Sign Up' && (
           <>
             <div className='diet-checkboxes'>
               <legend>Select your diet:</legend>

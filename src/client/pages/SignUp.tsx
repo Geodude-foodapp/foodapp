@@ -9,7 +9,7 @@ export default ({ logIn }: { logIn: () => void }) => {
         logIn={logIn}
         formMode='Sign Up'
       />
-      <p>
+      <p id='signup-prompt'>
         Already have an account?{' '}
         <Link
           to='/login'

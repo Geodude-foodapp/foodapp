@@ -1,3 +1,128 @@
 .active {
   color: red;
 }
+
+/**GENERAL STYLING**/
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100;400&family=M+PLUS+1p:wght@300;400&display=swap');
+
+body {
+background-image: linear-gradient(to right top, #ffec5c, #ffe05b, #ffd55c, #ffca5d, #ffbf5f, #ffb65f, #ffac60, #fea361, #ff9862, #ff8d65, #ff8269, #fe776e);
+background-repeat: no-repeat;
+background-size: 100% 1000px;
+font-family: 'Libre Franklin', sans-serif;
+font-weight: 100;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'M PLUS1p', sans-serif;
+}
+a {
+  color: rgb(47, 50, 53);
+  text-decoration: none;
+}
+a:hover {
+  color: black;
+  font-weight: bold;
+}
+button {
+  border-radius: 10px;
+  border: none;
+  padding: 5px 15px;
+  background-color:#ff9862;
+  color: white;
+}
+button:hover {
+  background-color: #ff8543
+}
+
+#navbar {
+  padding-top: 20px;
+  bottom: 10px;
+  width: 70%;
+  display: flex;
+  margin-left: 15%;
+  justify-content: space-between;
+}
+/** comment out when developing for easy page navigation*/
+.dev-toolbar {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*SIGN UP PAGE*/
+#signup{
+  display: flex;
+  padding: 2rem;
+  width: 70%;
+  margin: auto;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
+  background-color: rgb(251, 251, 251);
+}
+#signup h2{
+  text-align: center;
+  color:rgb(47, 50, 53)
+}
+#user-input-fields input{
+  font-size: 18px;
+  margin: 5px;
+  display: inline;
+  padding-left: 4px;
+  background-color: white;
+  border: 1px gray solid;
+  border-radius: 10px;
+}
+#user-input-fields input:focus{
+  background-color: rgb(240, 239, 239);
+  outline: 1px #ff8269 solid;
+}
+#user-form button {
+  margin-top: 10px;
+  font-size: 18px;
+  justify-content: center;
+}
+#user-checkboxes {
+  display: inline-flex;
+  justify-content: center;
+  margin: auto;
+  padding: 5px 30px;
+  width: 100%
+}
+#user-checkboxes input:focus{
+  outline: green;
+}
+
+/*LOGIN PAGE*/
+#login{
+  display: flex;
+  padding: 2rem;
+  width: 60%;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
+  background-color: rgb(251, 251, 251);
+}
+#login h2{
+  text-align: center;
+  color:rgb(47, 50, 53)
+}
+
+/*SETTINGS*/
+.settings-container{
+  display: block;
+  padding: 2rem;
+  width: 60%;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
+  background-color: rgb(251, 251, 251);
+}
+.settings-container h2{
+  text-align: center;
+  color:rgb(47, 50, 53)
+}
+.settings-container button{
+  margin: 10px;
+}

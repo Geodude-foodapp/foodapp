@@ -27,12 +27,12 @@ router.put('/settings', /* middelware */(req, res) => {
   return res.status(200).send();
 });
 // from search, add to favorites
-router.post('/search', /* middelware */(req, res) => {
-  return res.status(200).send();
+router.post('/search', favsController.recipeSearch, (req, res) => {
+  return res.status(200).json(res.locals.recipes);
 });
 // search post? 
-router.post('/search', /* middelware */(req, res) => {
-  return res.status(200).send();
-});
+// router.post('/search', /* middelware */(req, res) => {
+//   return res.status(200).send();
+// });
 
 export default router;

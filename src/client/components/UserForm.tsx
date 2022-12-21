@@ -19,7 +19,12 @@ export default ({ type, handleSubmit }: UserFormProps) => {
   return (
     <section id='user-form'>
       <h2>{`${type} Form`}</h2>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(formData);
+        }}
+      >
         <input
           type='text'
           placeholder='username'
@@ -38,12 +43,60 @@ export default ({ type, handleSubmit }: UserFormProps) => {
         />
         {type === 'Sign Up' && (
           <>
-            <legend>Select your diet:</legend>
-            <div>
+            <div className='diet-checkboxes'>
+              <legend>Select your diet:</legend>
               <input
                 type='checkbox'
-                name='vegan'
-              ></input>
+                name='diet'
+                id='vegan'
+                value='vegan'
+              />
+              <label htmlFor='vegan'>vegan</label>
+              <input
+                type='checkbox'
+                name='diet'
+                id='vegetarian'
+                value='vegetarian'
+              />
+              <label htmlFor='vegetarian'>vegetarian</label>
+              <input
+                type='checkbox'
+                name='diet'
+                id='gluten free'
+                value='gluten free'
+              />
+              <label htmlFor='gluten free'>gluten free</label>
+            </div>
+            <div className='intolerances-checkboxes'>
+              <legend>Select your intolerances:</legend>
+              <input
+                type='checkbox'
+                name='intolerances'
+                id='dairy'
+                value='dairy'
+              />
+              <label htmlFor='dairy'>dairy</label>
+              <input
+                type='checkbox'
+                name='intolerances'
+                id='eggs'
+                value='eggs'
+              />
+              <label htmlFor='eggs'>eggs</label>
+              <input
+                type='checkbox'
+                name='intolerances'
+                id='gluten'
+                value='gluten'
+              />
+              <label htmlFor='gluten'>gluten</label>
+              <input
+                type='checkbox'
+                name='intolerances'
+                id='grain'
+                value='grain'
+              />
+              <label htmlFor='grain'>grain</label>
             </div>
           </>
         )}

@@ -37,16 +37,17 @@ const userController: UserController = {
     })
 },
 
-//add new user to the database
+// add new user to the database
+// users table doesn't currently have diet, intolerance, exclude, those are on userspreference table
   createUser: (req, res, next) => {
     const { name, password, intolerance, diet, exclude } = req.body;
     bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
-      //TODO: update and sync with database. what is are the col names
       const qryStr = 'INSERT INTO users(name, password, diet, intolerance, exclude) VALUES ($1, $2, $3, $4, $5)';
       client.query(qryStr, [name, hash, diet, intolerance, exclude])
-        .then(() => {
-          res.locals.name = name
-          return next()
+        .then((data) => {
+            console.log(data)
+          res.locals.name = data.rows[0].name;
+          return next();
         })
         .catch((err: Error) => {
           return next({

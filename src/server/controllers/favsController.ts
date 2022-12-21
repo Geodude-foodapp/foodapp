@@ -6,6 +6,7 @@ dotenv.config();
 interface favsController {
   getUserInfo: RequestHandler;
   addFavorite: RequestHandler;
+  recipeSearch: RequestHandler;
 }
 
 interface userData {
@@ -76,7 +77,34 @@ const favsController: favsController = {
   },
   addFavorite: (req, res, next) => {
     // input: user id, recipe id
+  },
+  // adding search controller components here for time save, ideally migrate to different file in future :)
+  recipeSearch: async (req, res, next) => {
+    // preferences comes from front-end
+    // const {diet, intolerance} = req.body;
+    console.log(req.body)
+    const diet = req.body.diet
+    const intolerance = req.body.intolerance
+    console.log(diet)
+    console.log(intolerance)
+    // request to https://api.spoonacular.com/recipes/complexSearch?diet=${diet}&intolerances=${intolerance}
+    const recipes = await fetch(`https://api.spoonacular.com/recipes/random?tags=${diet},${intolerance}&number=10&apiKey=${process.env.API_KEY}`)
+    // process response for frontend
+    // contract says id, title, image, sourceurl
+    const recipeData = await recipes.json();
+    console.log(recipeData);
+    const recipeMap = recipeData.map((recipe: any) => {
+      return {
+        id: recipe.id,
+      title: recipe.title,
+      image: recipe.image,
+      sourceurl: recipe.sourceurl
+      }
+    })
+    res.locals.recipes = recipeMap;
+    return next();
   }
+
 };
 
 export default favsController;

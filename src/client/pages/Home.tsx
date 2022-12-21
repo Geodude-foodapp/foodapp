@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router';
 import axios from 'axios';
+import Navbar from '../components/Navbar';
 import RecipeCard from '../components/RecipeCard';
 import { RecipeData, UserData } from '../../Types';
 
@@ -47,6 +49,7 @@ export default ({ setUserData }: HomeProps) => {
       {/* MAIN DISPLAY */}
       <h1>Home</h1>
       {recipeCards}
+      <Navbar />
     </section>
   );
 };

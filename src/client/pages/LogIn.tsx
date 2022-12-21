@@ -7,9 +7,11 @@ export default () => {
   };
 
   return (
-    <UserForm
-      type='Log In'
-      handleSubmit={logIn}
-    />
+    <section id='login'>
+      <UserForm
+        type='Log In'
+        handleSubmit={logIn}
+      />
+    </section>
   );
 };

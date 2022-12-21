@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Log In Form Component matches the snapshot 1`] = `
+<section
+  id="user-form"
+>
+  <h2>
+    Log In Form
+  </h2>
+  <form>
+    <input
+      placeholder="username"
+      type="text"
+      value=""
+    />
+    <input
+      placeholder="password"
+      type="password"
+      value=""
+    />
+    <button>
+      Submit
+    </button>
+  </form>
+</section>
+`;
+
+exports[`Sign Up Form Component matches the snapshot 1`] = `
+<section
+  id="user-form"
+>
+  <h2>
+    Sign Up Form
+  </h2>
+  <form>
+    <input
+      placeholder="username"
+      type="text"
+      value=""
+    />
+    <input
+      placeholder="password"
+      type="password"
+      value=""
+    />
+    <button>
+      Submit
+    </button>
+  </form>
+</section>
+`;

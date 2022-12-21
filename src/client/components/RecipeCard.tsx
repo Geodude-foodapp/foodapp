@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default () => <p>Recipe Card</p>;
+export default () => <p className='recipe-card'>Recipe Card</p>;

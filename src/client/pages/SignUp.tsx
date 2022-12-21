@@ -6,9 +6,11 @@ export default () => {
     console.log('sign up');
   };
   return (
-    <UserForm
-      type='Sign Up'
-      handleSubmit={signUp}
-    />
+    <section id='signup'>
+      <UserForm
+        type='Sign Up'
+        handleSubmit={signUp}
+      />
+    </section>
   );
 };

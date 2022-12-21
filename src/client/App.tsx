@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import LogIn from './pages/LogIn';
 import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
-
+import Search from './pages/Search';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
@@ -32,6 +32,10 @@ export default function App() {
           {' '}
           <NavLink to='/settings'>Settings</NavLink>{' '}
         </li>
+        <li>
+          {' '}
+          <NavLink to='/search'>Search</NavLink>{' '}
+        </li>
         --------------------------------------------
       </ul>
       <Routes>
@@ -51,6 +55,10 @@ export default function App() {
         <Route
           path='/settings'
           element={<Settings />}
+        />
+        <Route
+          path='/search'
+          element={<Search />}
         />
       </Routes>
     </>

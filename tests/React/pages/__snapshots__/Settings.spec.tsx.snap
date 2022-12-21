@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings Page matches the snapshot 1`] = `
+<section
+  id="settings"
+>
+  <h1>
+    Settings
+  </h1>
+  ;
+</section>
+`;

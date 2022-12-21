@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Page matches the snapshot 1`] = `
+<section
+  id="home"
+>
+  <h1>
+    Home
+  </h1>
+  <p
+    class="recipe-card"
+  >
+    Recipe Card
+  </p>
+  <p
+    class="recipe-card"
+  >
+    Recipe Card
+  </p>
+  <p
+    class="recipe-card"
+  >
+    Recipe Card
+  </p>
+  <button>
+    Sidebar
+  </button>
+</section>
+`;

@@ -15,7 +15,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
   const [formData, setFormData] = useState(initialFormState);
 
   return (
-    <>
+    <section id='user-form'>
       <h2>{`${type} Form`}</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -36,6 +36,6 @@ export default ({ type, handleSubmit }: UserFormProps) => {
         />
         <button>Submit</button>
       </form>
-    </>
+    </section>
   );
 };

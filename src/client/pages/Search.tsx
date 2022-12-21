@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default () => (
-  <section id='settings'>
-    <h1>Settings</h1>;
+  <section id='search'>
+    <h1>Search Page</h1>
   </section>
 );

@@ -44,4 +44,50 @@ const intoleranceObj: { [key in Intolerance]: boolean } = {
   Wheat: false,
 };
 
-export { dietArr, intoleranceArr, intoleranceObj };
+const cuisineArr: string[] = [
+  'African',
+  'American',
+  'British',
+  'Cajun',
+  'Caribbean',
+  'Chinese',
+  'Eastern European',
+  'European',
+  'French',
+  'German',
+  'Greek',
+  'Indian',
+  'Irish',
+  'Italian',
+  'Japanese',
+  'Jewish',
+  'Korean',
+  'Latin American',
+  'Mediterranean',
+  'Mexican',
+  'Middle Eastern',
+  'Nordic',
+  'Southern',
+  'Spanish',
+  'Thai',
+  'Vietnamese',
+];
+
+const mealTypesArr: string[] = [
+  'main course',
+  'side dish',
+  'dessert',
+  'appetizer',
+  'salad',
+  'bread',
+  'breakfast',
+  'soup',
+  'beverage',
+  'sauce',
+  'marinade',
+  'fingerfood',
+  'snack',
+  'drink',
+];
+
+export { dietArr, intoleranceArr, intoleranceObj, cuisineArr, mealTypesArr };

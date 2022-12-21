@@ -16,9 +16,9 @@ export default function App() {
     favorites: [],
   });
 
-  useEffect(() => {
-    // TODO: make fetch request to check if logged in
-  }, []);
+  // useEffect(() => {
+  //   // TODO: make fetch request to check if logged in
+  // }, []);
 
   return (
     <>
@@ -66,7 +66,7 @@ export default function App() {
         />
         <Route
           path='/search'
-          element={<Search />}
+          element={<Search userData={userData} />}
         />
       </Routes>
     </>

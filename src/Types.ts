@@ -37,6 +37,13 @@ export type RecipeData = {
   id: number;
   title: string;
   image: string;
+  sourceurl: string;
+};
+
+export type FavoriteData = {
+  id: number;
+  title: string;
+  image: string;
   sourceUrl: string;
 };
 
@@ -45,7 +52,7 @@ export type UserData = {
   name: string;
   diet?: Diet;
   intolerance: { [key in Intolerance]: boolean };
-  favorites: RecipeData[];
+  favorites: FavoriteData[];
 };
 
 export type BackendUserFormState = {

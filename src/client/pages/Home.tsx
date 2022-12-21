@@ -16,13 +16,13 @@ export default ({ userData }: HomeProps) => {
   };
 
   const recipeCards = userData.favorites.map(
-    ({ id, title, image, sourceurl }) => (
+    ({ id, title, image, sourceUrl }) => (
       <RecipeCard
         key={`recipe-${id}`}
         recipeId={id}
         title={title}
         image={image}
-        sourceurl={sourceurl}
+        sourceUrl={sourceUrl}
         type='favorite'
         removeFavorite={() => removeFavorite(id)}
       />

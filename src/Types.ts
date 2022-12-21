@@ -37,7 +37,7 @@ export type RecipeData = {
   id: number;
   title: string;
   image: string;
-  sourceurl: string;
+  sourceUrl: string;
 };
 
 // UserData state stored in App.tsx

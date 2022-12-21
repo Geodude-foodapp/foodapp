@@ -6,7 +6,7 @@ import LogIn from './pages/LogIn';
 import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
 import Search from './pages/Search';
-import { UserData } from '../Types';
+import { UserData, RecipeData } from '../Types';
 import { intoleranceObj } from './utils/dataObjects';
 
 export default function App() {
@@ -27,7 +27,18 @@ export default function App() {
     axios
       .get('/api/favorites')
       .then(({ data }) => {
-        setUserData(data);
+        const parsedFavorites: RecipeData[] = data.favorites.map(
+          (recipe: any) => {
+            const { id, title, image, sourceUrl } = recipe;
+            return { id, title, image, sourceUrl };
+          }
+        );
+
+        const newUserData: UserData = {
+          ...data,
+          favorites: parsedFavorites,
+        };
+        setUserData(newUserData);
       })
       .catch((err) => console.error(err));
   }

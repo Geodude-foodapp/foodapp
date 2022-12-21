@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import UserForm from '../components/UserForm';
 import { UserFormState } from '../../Types';
+import { useNavigate } from 'react-router-dom';
 
 export default () => {
   const signUp = (formData: UserFormState) => {
@@ -14,6 +15,9 @@ export default () => {
         console.error(err);
       });
   };
+
+  const navigate = useNavigate()
+
   return (
     <section id='signup'>
       <UserForm

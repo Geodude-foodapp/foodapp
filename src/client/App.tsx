@@ -62,7 +62,7 @@ export default function App() {
         />
         <Route
           path='/settings'
-          element={<Settings />}
+          element={<Settings setUserData={(data: UserData) => setUserData(data)} />}
         />
         <Route
           path='/search'

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { UserFormState } from '../../Types';
-import { dietArr, intoleranceArr } from '../utils/arrs';
-import { intoleranceObj } from '../utils/objs';
+import React, { useState } from "react";
+import { UserFormState } from "../../Types";
+import { dietArr, intoleranceArr } from "../utils/arrs";
+import { intoleranceObj } from "../utils/objs";
 
 type UserFormProps = {
-  type: 'Sign Up' | 'Log In';
+  type: "Sign Up" | "Log In";
   handleSubmit: (formData: UserFormState) => void;
 };
 
 export default ({ type, handleSubmit }: UserFormProps) => {
   const initialFormState: UserFormState = {
-    name: '',
-    password: '',
+    name: "",
+    password: "",
     intolerance: intoleranceObj,
   };
 
@@ -19,11 +19,11 @@ export default ({ type, handleSubmit }: UserFormProps) => {
 
   // If type is Log In, don't waste time populating dietInputs and intoleranceInputs
   let dietInputs, intoleranceInputs;
-  if (type === 'Sign Up') {
+  if (type === "Sign Up") {
     dietInputs = dietArr.map((diet) => (
       <div key={`${diet}-container`}>
         <input
-          type='checkbox'
+          type="checkbox"
           key={diet}
           name={diet}
           id={`${diet}-diet`}
@@ -31,10 +31,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
           checked={formData.diet === diet}
           onChange={() => setFormData((state) => ({ ...state, diet }))}
         />
-        <label
-          key={`${diet}-label`}
-          htmlFor={`${diet}-diet`}
-        >
+        <label key={`${diet}-label`} htmlFor={`${diet}-diet`}>
           {diet}
         </label>
       </div>
@@ -43,7 +40,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
     intoleranceInputs = intoleranceArr.map((intol) => (
       <div key={`${intol}-container`}>
         <input
-          type='checkbox'
+          type="checkbox"
           key={intol}
           name={intol}
           id={intol}
@@ -59,10 +56,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
             }))
           }
         />
-        <label
-          key={`${intol}-label`}
-          htmlFor={intol}
-        >
+        <label key={`${intol}-label`} htmlFor={intol}>
           {intol}
         </label>
       </div>
@@ -70,14 +64,22 @@ export default ({ type, handleSubmit }: UserFormProps) => {
   }
 
   return (
-    <section id='user-form'>
-      <h2>{`${type} Form`}</h2>
+    <section id="user-form">
+      {type === 'Sign Up' && (
+        <h2> Create an account</h2>
+      )}
+      {type === 'Log In' &&(
+        <h2> Log in to your account </h2>
+      )}
       <form
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(formData);
+        }}
       >
         <input
-          type='text'
-          placeholder='username'
+          type="text"
+          placeholder="username"
           required
           value={formData.name}
           onChange={(e) =>
@@ -85,8 +87,8 @@ export default ({ type, handleSubmit }: UserFormProps) => {
           }
         />
         <input
-          type='password'
-          placeholder='password'
+          type="password"
+          placeholder="password"
           required
           minLength={8}
           value={formData.password}
@@ -96,16 +98,16 @@ export default ({ type, handleSubmit }: UserFormProps) => {
         />
 
         {/* SIGNUP-SPECIFIC INPUTS */}
-        {type === 'Sign Up' && (
-          <>
-            <div className='diet-checkboxes'>
+        {type === "Sign Up" && (
+          <div className='boxes'>
+            <div>
               <legend>Select your diet:</legend>
               {dietInputs}
               <input
-                type='checkbox'
-                name='none'
-                id='none-diet'
-                value='none'
+                type="checkbox"
+                name="none"
+                id="none-diet"
+                value="none"
                 checked={!formData.diet}
                 onChange={() =>
                   setFormData((state) => {
@@ -114,14 +116,13 @@ export default ({ type, handleSubmit }: UserFormProps) => {
                   })
                 }
               />
-              <label htmlFor='none-diet'>None</label>
+              <label htmlFor="none-diet">None</label>
             </div>
-
-            <div className='intolerances-checkboxes'>
+            <div>
               <legend>Select your intolerances:</legend>
               {intoleranceInputs}
             </div>
-          </>
+          </div>
         )}
         <button>Submit</button>
       </form>

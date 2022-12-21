@@ -1,4 +1,11 @@
 import React from "react";
+import { render } from "react-dom";
+import { UserData } from '../../Types';
+
+
+type SettingsProps = {
+  setUserData: (data: UserData) => void;
+};
 
 export default () => (
   <section id="settings">

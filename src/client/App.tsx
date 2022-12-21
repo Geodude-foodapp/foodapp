@@ -23,7 +23,7 @@ export default function App() {
   return (
     <>
       <ul>
-        Dev Toolbar
+        <div className='dev-toolbar'>
         <li>
           {' '}
           <NavLink to='/'>Home</NavLink>{' '}
@@ -44,7 +44,7 @@ export default function App() {
           {' '}
           <NavLink to='/search'>Search</NavLink>{' '}
         </li>
-        --------------------------------------------
+        </div>
       </ul>
       <Routes>
         <Route
@@ -62,7 +62,7 @@ export default function App() {
         />
         <Route
           path='/settings'
-          element={<Settings />}
+          element={<Settings setUserData={(data: UserData) => setUserData(data)} />}
         />
         <Route
           path='/search'

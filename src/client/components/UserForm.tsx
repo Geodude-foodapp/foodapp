@@ -11,8 +11,8 @@ type UserFormProps = {
 
 export default ({ formMode }: UserFormProps) => {
   const initialFormState: UserFormState = {
-    name: '',
-    password: '',
+    name: "",
+    password: "",
     intolerance: intoleranceObj,
   };
   const [formData, setFormData] = useState(initialFormState);
@@ -48,14 +48,13 @@ export default ({ formMode }: UserFormProps) => {
         console.error(err);
       });
   }
-
   // If formMode is Log In, don't waste time populating dietInputs and intoleranceInputs
   let dietInputs, intoleranceInputs;
   if (formMode === 'Sign Up') {
     dietInputs = dietArr.map((diet) => (
       <div key={`${diet}-container`}>
         <input
-          type='checkbox'
+          type="checkbox"
           key={diet}
           name={diet}
           id={`${diet}-diet`}
@@ -63,10 +62,7 @@ export default ({ formMode }: UserFormProps) => {
           checked={formData.diet === diet}
           onChange={() => setFormData((state) => ({ ...state, diet }))}
         />
-        <label
-          key={`${diet}-label`}
-          htmlFor={`${diet}-diet`}
-        >
+        <label key={`${diet}-label`} htmlFor={`${diet}-diet`}>
           {diet}
         </label>
       </div>
@@ -75,7 +71,7 @@ export default ({ formMode }: UserFormProps) => {
     intoleranceInputs = intoleranceArr.map((intol) => (
       <div key={`${intol}-container`}>
         <input
-          type='checkbox'
+          type="checkbox"
           key={intol}
           name={intol}
           id={intol}
@@ -91,10 +87,7 @@ export default ({ formMode }: UserFormProps) => {
             }))
           }
         />
-        <label
-          key={`${intol}-label`}
-          htmlFor={intol}
-        >
+        <label key={`${intol}-label`} htmlFor={intol}>
           {intol}
         </label>
       </div>
@@ -103,7 +96,12 @@ export default ({ formMode }: UserFormProps) => {
 
   return (
     <section id='user-form'>
-      <h2>{`${formMode} Form`}</h2>
+      {formMode === 'Sign Up' && (
+        <h2> Create an account</h2>
+      )}
+      {formMode === 'Log In' &&(
+        <h2> Log in to your account </h2>
+      )}
       {attemptFailed && <p>{formMode} attempt failed. Please try again.</p>}
       <form
         onSubmit={(e) => {
@@ -111,9 +109,10 @@ export default ({ formMode }: UserFormProps) => {
           handleSubmit(formData);
         }}
       >
+        <div id='user-input-fields'>
         <input
-          type='text'
-          placeholder='username'
+          type="text"
+          placeholder="username"
           required
           value={formData.name}
           onChange={(e) =>
@@ -121,8 +120,8 @@ export default ({ formMode }: UserFormProps) => {
           }
         />
         <input
-          type='password'
-          placeholder='password'
+          type="password"
+          placeholder="password"
           required
           minLength={8}
           value={formData.password}
@@ -130,18 +129,18 @@ export default ({ formMode }: UserFormProps) => {
             setFormData((state) => ({ ...state, password: e.target.value }))
           }
         />
-
+        </div>
         {/* SIGNUP-SPECIFIC INPUTS */}
         {formMode === 'Sign Up' && (
-          <>
+          <div>
             <div className='diet-checkboxes'>
-              <legend>Select your diet:</legend>
+              <legend><h4>Select your diet:</h4></legend>
               {dietInputs}
               <input
-                type='checkbox'
-                name='none'
-                id='none-diet'
-                value='none'
+                type="checkbox"
+                name="none"
+                id="none-diet"
+                value="none"
                 checked={!formData.diet}
                 onChange={() =>
                   setFormData((state) => {
@@ -150,14 +149,13 @@ export default ({ formMode }: UserFormProps) => {
                   })
                 }
               />
-              <label htmlFor='none-diet'>None</label>
+              <label htmlFor="none-diet">None</label>
             </div>
-
-            <div className='intolerances-checkboxes'>
-              <legend>Select your intolerances:</legend>
+            <div>
+              <legend><h4>Select your intolerances:</h4></legend>
               {intoleranceInputs}
             </div>
-          </>
+          </div>
         )}
         <button>Submit</button>
       </form>

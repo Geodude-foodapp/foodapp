@@ -15,6 +15,7 @@ export default ({setUserData }: SettingsProps) => (
       <div className="current-preferences">
         <h3>Current Preferences:</h3>
         <h4>Diet</h4>
+        {}
         <h4>Intolerances</h4>
         <button>Update Preferences</button>
       </div>

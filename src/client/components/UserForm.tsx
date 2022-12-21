@@ -48,7 +48,6 @@ export default ({ formMode }: UserFormProps) => {
         console.error(err);
       });
   }
-
   // If formMode is Log In, don't waste time populating dietInputs and intoleranceInputs
   let dietInputs, intoleranceInputs;
   if (formMode === 'Sign Up') {
@@ -97,15 +96,13 @@ export default ({ formMode }: UserFormProps) => {
 
   return (
     <section id='user-form'>
-      <h2>{`${formMode} Form`}</h2>
-      {attemptFailed && <p>{formMode} attempt failed. Please try again.</p>}
-    <section id="user-form">
-      {type === 'Sign Up' && (
+      {formMode === 'Sign Up' && (
         <h2> Create an account</h2>
       )}
-      {type === 'Log In' &&(
+      {formMode === 'Log In' &&(
         <h2> Log in to your account </h2>
       )}
+      {attemptFailed && <p>{formMode} attempt failed. Please try again.</p>}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -135,9 +132,9 @@ export default ({ formMode }: UserFormProps) => {
         </div>
         {/* SIGNUP-SPECIFIC INPUTS */}
         {formMode === 'Sign Up' && (
-          <>
+          <div>
             <div className='diet-checkboxes'>
-              <legend>Select your diet:</legend>
+              <legend><h4>Select your diet:</h4></legend>
               {dietInputs}
               <input
                 type="checkbox"

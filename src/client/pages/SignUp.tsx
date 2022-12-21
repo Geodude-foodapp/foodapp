@@ -6,7 +6,7 @@ export default () => {
   return (
     <section id='signup'>
       <UserForm formMode='Sign Up' />
-      <p>
+      <p id='signup-prompt'>
         Already have an account? <Link to='/login'>Log in</Link>{' '}
       </p>
     </section>

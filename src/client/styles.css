@@ -54,8 +54,9 @@ button:hover {
 #signup{
   display: flex;
   padding: 2rem;
-  width: 60%;
+  width: 70%;
   margin: auto;
+  justify-content: center;
   border-radius: 20px;
   box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
   background-color: rgb(251, 251, 251);
@@ -66,6 +67,8 @@ button:hover {
 }
 #user-input-fields input{
   font-size: 18px;
+  margin: 5px;
+  display: inline;
   padding-left: 4px;
   background-color: white;
   border: 1px gray solid;

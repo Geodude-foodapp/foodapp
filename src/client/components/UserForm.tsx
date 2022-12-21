@@ -21,7 +21,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
   let dietInputs, intoleranceInputs;
   if (type === 'Sign Up') {
     dietInputs = dietArr.map((diet) => (
-      <>
+      <div key={`${diet}-container`}>
         <input
           type='checkbox'
           key={diet}
@@ -31,12 +31,17 @@ export default ({ type, handleSubmit }: UserFormProps) => {
           checked={formData.diet === diet}
           onChange={() => setFormData((state) => ({ ...state, diet }))}
         />
-        <label htmlFor={`${diet}-diet`}>{diet}</label>
-      </>
+        <label
+          key={`${diet}-label`}
+          htmlFor={`${diet}-diet`}
+        >
+          {diet}
+        </label>
+      </div>
     ));
 
     intoleranceInputs = intoleranceArr.map((intol) => (
-      <>
+      <div key={`${intol}-container`}>
         <input
           type='checkbox'
           key={intol}
@@ -54,8 +59,13 @@ export default ({ type, handleSubmit }: UserFormProps) => {
             }))
           }
         />
-        <label htmlFor={intol}>{intol}</label>
-      </>
+        <label
+          key={`${intol}-label`}
+          htmlFor={intol}
+        >
+          {intol}
+        </label>
+      </div>
     ));
   }
 
@@ -74,7 +84,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
           required
           value={formData.name}
           onChange={(e) =>
-            setFormData((state) => ({ ...state, username: e.target.value }))
+            setFormData((state) => ({ ...state, name: e.target.value }))
           }
         />
         <input

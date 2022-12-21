@@ -44,7 +44,7 @@ export type FavoriteData = {
   id: number;
   title: string;
   image: string;
-  sourceurl: string;
+  sourceUrl: string;
 };
 
 // UserData state stored in App.tsx

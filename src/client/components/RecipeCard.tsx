@@ -4,7 +4,7 @@ type RecipeCardProps = {
   recipeId: number;
   title: string;
   image: string;
-  sourceurl: string;
+  sourceUrl: string;
   type: 'favorite' | 'search';
   addFavorite?: () => void;
   removeFavorite?: () => void;
@@ -13,7 +13,7 @@ export default ({
   recipeId,
   title,
   image,
-  sourceurl,
+  sourceUrl,
   type,
   addFavorite,
   removeFavorite,
@@ -26,7 +26,7 @@ export default ({
         src={image}
         alt='recipe-image'
       />
-      <a href={sourceurl}>Go to recipe site</a>
+      <a href={sourceUrl}>Go to recipe site</a>
       <button onClick={handleClick}></button>
     </div>
   );

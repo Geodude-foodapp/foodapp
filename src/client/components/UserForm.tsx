@@ -101,7 +101,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
         {type === "Sign Up" && (
           <div className='boxes'>
             <div>
-              <legend>Select your diet:</legend>
+              <legend><h4>Select your diet:</h4></legend>
               {dietInputs}
               <input
                 type="checkbox"
@@ -119,7 +119,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
               <label htmlFor="none-diet">None</label>
             </div>
             <div>
-              <legend>Select your intolerances:</legend>
+              <legend><h4>Select your intolerances:</h4></legend>
               {intoleranceInputs}
             </div>
           </div>

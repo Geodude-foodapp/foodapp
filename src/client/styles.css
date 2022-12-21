@@ -126,3 +126,13 @@ button:hover {
 .settings-container button{
   margin: 10px;
 }
+
+.recipe-card{
+  display: inline-flex;
+  padding: 2rem;
+  width: 80%;
+  margin: auto;
+  border-radius: 20px;
+  box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
+  background-color: rgb(251, 251, 251);
+}

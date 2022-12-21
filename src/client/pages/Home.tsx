@@ -11,7 +11,7 @@ type HomeProps = {
 export default ({ setUserData }: HomeProps) => {
   const [favorites, setFavorites] = useState<RecipeData[]>([]);
   const [isUserDataFetched, setIsUserDataFetched] = useState(false);
-  // TODO: fetch recipe data
+
   useEffect(() => {
     if (isUserDataFetched) return;
 

@@ -77,6 +77,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
           handleSubmit(formData);
         }}
       >
+        <div id='user-input-fields'>
         <input
           type="text"
           placeholder="username"
@@ -96,10 +97,10 @@ export default ({ type, handleSubmit }: UserFormProps) => {
             setFormData((state) => ({ ...state, password: e.target.value }))
           }
         />
-
+        </div>
         {/* SIGNUP-SPECIFIC INPUTS */}
         {type === "Sign Up" && (
-          <div className='boxes'>
+          <div id='user-checkboxes'>
             <div>
               <legend><h4>Select your diet:</h4></legend>
               {dietInputs}

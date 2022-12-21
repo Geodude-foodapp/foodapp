@@ -24,9 +24,19 @@ a:hover {
   color: black;
   font-weight: bold;
 }
+button {
+  border-radius: 10px;
+  border: none;
+  padding: 5px 15px;
+  background-color:#ff9862;
+  color: white;
+}
+button:hover {
+  background-color: #ff8543
+}
 
 #navbar {
-  position: fixed;
+  padding-top: 20px;
   bottom: 10px;
   width: 70%;
   display: flex;
@@ -44,15 +54,42 @@ a:hover {
 #signup{
   display: flex;
   padding: 2rem;
-  width: 80%;
+  width: 60%;
   margin: auto;
   border-radius: 20px;
   box-shadow: 6px 10px 15px -6px rgba(153,153,153,1);
   background-color: rgb(251, 251, 251);
 }
-
-/**/
-.boxes{
-  display: inline-flex;
+#signup h2{
+  text-align: center;
+  color:rgb(47, 50, 53)
 }
+#user-input-fields input{
+  font-size: 18px;
+  padding-left: 4px;
+  background-color: white;
+  border: 1px gray solid;
+  border-radius: 10px;
+}
+#user-input-fields input:focus{
+  background-color: rgb(240, 239, 239);
+  outline: 1px #ff8269 solid;
+}
+#user-form button {
+  margin-top: 10px;
+  font-size: 18px;
+  justify-content: center;
+  margin-left: 40%;
+}
+#user-checkboxes {
+  display: inline-flex;
+  justify-content: center;
+  margin: auto;
+  padding: 5px 30px;
+  width: 100%
+}
+#user-checkboxes input:focus{
+  outline: green;
+}
+
 

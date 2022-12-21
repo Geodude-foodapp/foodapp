@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
+import axios from 'axios';
 import Home from './pages/Home';
 import LogIn from './pages/LogIn';
 import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
 import Search from './pages/Search';
-import { UserData } from '../Types';
+import { UserData, RecipeData } from '../Types';
 import { intoleranceObj } from './utils/dataObjects';
 
 export default function App() {
@@ -16,9 +17,31 @@ export default function App() {
     favorites: [],
   });
 
-  useEffect(() => {
-    // TODO: make fetch request to check if logged in
-  }, []);
+  // TODO: ADD ENDPOINT TO CHECK IF SESSION EXISTS AND, IF SO, REDIRECT TO HOME PAGE
+  // useEffect(() => {
+  //   axios.get('')
+  // }, []);
+
+  function logIn(): void {
+    setIsLoggedIn(true);
+    axios
+      .get('/api/favorites')
+      .then(({ data }) => {
+        const parsedFavorites: RecipeData[] = data.favorites.map(
+          (recipe: any) => {
+            const { id, title, image, sourceUrl } = recipe;
+            return { id, title, image, sourceUrl };
+          }
+        );
+
+        const newUserData: UserData = {
+          ...data,
+          favorites: parsedFavorites,
+        };
+        setUserData(newUserData);
+      })
+      .catch((err) => console.error(err));
+  }
 
   return (
     <>
@@ -47,18 +70,24 @@ export default function App() {
         </div>
       </ul>
       <Routes>
+        {!isLoggedIn && (
+          <Route
+            path='/'
+            element={<LogIn logIn={() => setIsLoggedIn(true)} />}
+          />
+        )}
         <Route
           path='/'
           // element={isLoggedIn ? <Home /> : <SignUp />}
-          element={<Home setUserData={(data: UserData) => setUserData(data)} />}
+          element={<Home userData={userData} />}
         />
         <Route
           path='/signup'
-          element={<SignUp />}
+          element={<SignUp logIn={() => setIsLoggedIn(true)} />}
         />
         <Route
           path='/login'
-          element={<LogIn />}
+          element={<LogIn logIn={logIn} />}
         />
         <Route
           path='/settings'
@@ -66,7 +95,7 @@ export default function App() {
         />
         <Route
           path='/search'
-          element={<Search />}
+          element={<Search userData={userData} />}
         />
       </Routes>
     </>

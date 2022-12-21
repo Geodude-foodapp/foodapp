@@ -7,16 +7,17 @@ import { intoleranceObj } from '../utils/dataObjects';
 
 type UserFormProps = {
   formMode: 'Sign Up' | 'Log In';
+  logIn: () => void;
 };
 
-export default ({ formMode }: UserFormProps) => {
+export default ({ formMode, logIn }: UserFormProps) => {
   const initialFormState: UserFormState = {
     name: "",
     password: "",
     intolerance: intoleranceObj,
   };
-  const [formData, setFormData] = useState(initialFormState);
-  const [attemptFailed, setAttemptFailed] = useState(false);
+  const [formData, setFormData] = useState<UserFormState>(initialFormState);
+  const [attemptFailed, setAttemptFailed] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -42,7 +43,10 @@ export default ({ formMode }: UserFormProps) => {
       .post(`/api/${endpoint}`, postData)
       .then(({ data }) => {
         if (!data.auth) return setAttemptFailed(true);
-        else navigate('/');
+
+        logIn();
+        // Replace option prevents user from going using back button to return here
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         console.error(err);

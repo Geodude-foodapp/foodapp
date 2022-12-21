@@ -1,42 +1,55 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router';
+import axios from 'axios';
+import Navbar from '../components/Navbar';
 import RecipeCard from '../components/RecipeCard';
-import Sidebar from '../modals/Sidebar';
-import SearchModal from '../modals/SearchModal';
+import { RecipeData, UserData } from '../../Types';
 
-export default () => {
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [searchModalIsOpen, setSearchModalIsOpen] = useState(false);
-  const [favorites, setFavorites] = useState([1, 2, 3]);
+type HomeProps = {
+  setUserData: (data: UserData) => void;
+};
+export default ({ setUserData }: HomeProps) => {
+  const [favorites, setFavorites] = useState<RecipeData[]>([]);
+  const [isUserDataFetched, setIsUserDataFetched] = useState(false);
   // TODO: fetch recipe data
-  const recipeCards = favorites.map((el) => <RecipeCard />);
+  useEffect(() => {
+    if (isUserDataFetched) return;
 
-  const getRecipes = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: hit api for recipe results
+    axios
+      .get('/api/user')
+      .then(({ data }) => {
+        setIsUserDataFetched(true);
+        setFavorites(data.favorites);
+        setUserData(data.userData);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const removeFavorite = (recipeId: number): void => {
+    axios
+      .delete('/api/favorite', { data: recipeId })
+      .then(({ data }) => console.log(data))
+      .catch((err) => console.error(err));
   };
 
+  const recipeCards = favorites.map(({ id, title, image, sourceurl }) => (
+    <RecipeCard
+      key={`recipe-${id}`}
+      recipeId={id}
+      title={title}
+      image={image}
+      sourceurl={sourceurl}
+      type='favorite'
+      removeFavorite={() => removeFavorite(id)}
+    />
+  ));
+
   return (
-    <>
-      {/* HIDDEN SIDEBAR */}
-      {sidebarIsOpen && (
-        <Sidebar closeSidebar={() => setSidebarIsOpen(false)} />
-      )}
+    <section id='home'>
       {/* MAIN DISPLAY */}
       <h1>Home</h1>
       {recipeCards}
-      <div>
-        <form onSubmit={getRecipes}>
-          <input
-            placeholder='Search Recipes'
-            type='text'
-          />
-        </form>
-        <button onClick={() => setSidebarIsOpen(true)}>
-          {/* TODO: use hamburger icon */}
-          Sidebar
-        </button>
-      </div>
-    </>
+      <Navbar />
+    </section>
   );
 };

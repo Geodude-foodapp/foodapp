@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign Up Page matches the snapshot 1`] = `
+<section
+  id="search"
+>
+  <h1>
+    Search Page
+  </h1>
+</section>
+`;

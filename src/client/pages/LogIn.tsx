@@ -1,15 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 
 export default () => {
-  const logIn = () => {
-    console.log('log in');
-  };
-
   return (
-    <UserForm
-      type='Log In'
-      handleSubmit={logIn}
-    />
+    <section id='login'>
+      <UserForm formMode='Log In' />
+      <p>
+        Need an account? <Link to='/signup'>Sign up</Link>
+      </p>
+    </section>
   );
 };

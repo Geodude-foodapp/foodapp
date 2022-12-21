@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign Up Page matches the snapshot 1`] = `
+<section
+  id="signup"
+>
+  <section
+    id="user-form"
+  >
+    <h2>
+      Sign Up Form
+    </h2>
+    <form>
+      <input
+        placeholder="username"
+        type="text"
+        value=""
+      />
+      <input
+        placeholder="password"
+        type="password"
+        value=""
+      />
+      <button>
+        Submit
+      </button>
+    </form>
+  </section>
+</section>
+`;

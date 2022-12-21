@@ -20,13 +20,17 @@ export default ({ formMode }: UserFormProps) => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (formData: UserFormState): void => {
+  function handleSubmit(formData: UserFormState): void {
     const endpoint = formMode === 'Log In' ? 'login' : 'signup';
 
+    // Stringify intolerances to facilitate working with current SQL setup
     let signUpData;
     if (formMode === 'Sign Up') {
-      // Stringify intolerances to facilitate working with current SQL setup
-      const intoleranceString = Object.values(formData.intolerance).join(',');
+      const intoleranceString = Object.entries(formData.intolerance)
+        .filter((entry) => entry[1])
+        .map((entry) => entry[0])
+        .join(',');
+
       signUpData = {
         ...formData,
         intolerance: intoleranceString,
@@ -43,7 +47,7 @@ export default ({ formMode }: UserFormProps) => {
       .catch((err) => {
         console.error(err);
       });
-  };
+  }
 
   // If formMode is Log In, don't waste time populating dietInputs and intoleranceInputs
   let dietInputs, intoleranceInputs;

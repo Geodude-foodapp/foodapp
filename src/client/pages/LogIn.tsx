@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import UserForm from '../components/UserForm';
-import { UserFormState } from '../../Types';
 
 export default () => {
   return (

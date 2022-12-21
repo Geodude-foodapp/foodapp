@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-import { UserData, Diet,, Intolerance} from '../../Types';
+import { UserData, Diet, Intolerance } from '../../Types';
 import { cuisineArr, mealTypesArr } from '../utils/dataObjects';
 
 type SearchProps = {
@@ -8,9 +8,8 @@ type SearchProps = {
 };
 type SearchFormData = {
   diet?: Diet;
-  intolerance: {[key in Intolerance]: boolean};
-   
-}
+  intolerance: { [key in Intolerance]: boolean };
+};
 export default ({ userData }: SearchProps) => {
   const [formData, setFormData] = useState();
 

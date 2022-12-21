@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 
-export default () => {
+export default ({ logIn }: { logIn: () => void }) => {
   return (
     <section id='signup'>
-      <UserForm formMode='Sign Up' />
+      <UserForm
+        logIn={logIn}
+        formMode='Sign Up'
+      />
       <p>
-        Already have an account? <Link to='/login'>Log in</Link>{' '}
+        Already have an account?{' '}
+        <Link
+          to='/login'
+          replace
+        >
+          Log in
+        </Link>{' '}
       </p>
     </section>
   );

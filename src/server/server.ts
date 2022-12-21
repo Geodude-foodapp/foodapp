@@ -4,11 +4,19 @@ import { Request, Response, NextFunction } from 'express';
 import router from './routes';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import postgres from 'postgres';
+import {Client} from 'pg';
 import * as dotenv from 'dotenv';
 dotenv.config();
-// instantiate new sql instance - connections are made lazily
-export const sql = postgres(process.env.PG_URI as string);
+// initialize instance of datbase client
+const connectionstring = process.env.PG_URI as string;
+export const client = new Client(connectionstring);
+client.connect((err: Error) => {
+  if (err) {
+    console.error('DB connection error...', err);
+  } else {
+    console.log('DB connected!');
+  }
+})
 // initialize server
 const app = express();
 // handle json reqs and forms

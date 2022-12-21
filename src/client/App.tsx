@@ -5,6 +5,7 @@ import LogIn from './pages/LogIn';
 import Settings from './pages/Settings';
 import SignUp from './pages/SignUp';
 import Search from './pages/Search';
+import Navbar from './components/Navbar';
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
@@ -61,6 +62,7 @@ export default function App() {
           element={<Search />}
         />
       </Routes>
+      <Navbar />
     </>
   );
 }

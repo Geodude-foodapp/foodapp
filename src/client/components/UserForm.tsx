@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { UserFormState } from '../../Types';
+import { useNavigate } from 'react-router-dom';
 
 type UserFormProps = {
   type: 'Sign Up' | 'Log In';
@@ -8,10 +9,11 @@ type UserFormProps = {
 
 export default ({ type, handleSubmit }: UserFormProps) => {
   const initialFormState: UserFormState = {
-    username: '',
+    name: '',
     password: '',
   };
 
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialFormState);
 
   return (
@@ -21,7 +23,7 @@ export default ({ type, handleSubmit }: UserFormProps) => {
         <input
           type='text'
           placeholder='username'
-          value={formData.username}
+          value={formData.name}
           onChange={(e) =>
             setFormData((state) => ({ ...state, username: e.target.value }))
           }
@@ -34,6 +36,17 @@ export default ({ type, handleSubmit }: UserFormProps) => {
             setFormData((state) => ({ ...state, password: e.target.value }))
           }
         />
+        {type === 'Sign Up' && (
+          <>
+            <legend>Select your diet:</legend>
+            <div>
+              <input
+                type='checkbox'
+                name='vegan'
+              ></input>
+            </div>
+          </>
+        )}
         <button>Submit</button>
       </form>
     </section>

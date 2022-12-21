@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
+import axios from 'axios';
 import Home from './pages/Home';
 import LogIn from './pages/LogIn';
 import Settings from './pages/Settings';
@@ -16,9 +17,20 @@ export default function App() {
     favorites: [],
   });
 
-  useEffect(() => {
-    // TODO: make fetch request to check if logged in
-  }, []);
+  // TODO: ADD ENDPOINT TO CHECK IF SESSION EXISTS AND, IF SO, REDIRECT TO HOME PAGE
+  // useEffect(() => {
+  //   axios.get('')
+  // }, []);
+
+  function logIn(): void {
+    setIsLoggedIn(true);
+    axios
+      .get('/api/favorites')
+      .then(({ data }) => {
+        setUserData(data);
+      })
+      .catch((err) => console.error(err));
+  }
 
   return (
     <>
@@ -47,18 +59,24 @@ export default function App() {
         --------------------------------------------
       </ul>
       <Routes>
+        {!isLoggedIn && (
+          <Route
+            path='/'
+            element={<LogIn logIn={() => setIsLoggedIn(true)} />}
+          />
+        )}
         <Route
           path='/'
           // element={isLoggedIn ? <Home /> : <SignUp />}
-          element={<Home setUserData={(data: UserData) => setUserData(data)} />}
+          element={<Home userData={userData} />}
         />
         <Route
           path='/signup'
-          element={<SignUp />}
+          element={<SignUp logIn={() => setIsLoggedIn(true)} />}
         />
         <Route
           path='/login'
-          element={<LogIn />}
+          element={<LogIn logIn={logIn} />}
         />
         <Route
           path='/settings'

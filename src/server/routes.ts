@@ -12,10 +12,10 @@ router.post('/login', userController.loginUser, authController.addJwt);
 router.post('/signup', userController.createUser, authController.addJwt);
 // get request to auth for login and sign up verification
 router.get('/auth', authController.verifyJwt, (req, res) => {
-  return res.status(200).send();
+  return res.status(200).send(res.locals.userData);
 });
 // favorites get
-router.get('/favorites', /* middelware */(req, res) => {
+router.get('/favorites', favsController.getUserInfo, (req, res) => {
   return res.status(200).send();
 });
 // add favorites post

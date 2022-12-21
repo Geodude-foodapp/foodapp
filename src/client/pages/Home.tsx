@@ -1,18 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import RecipeCard from '../components/RecipeCard';
+import { RecipeData, UserData } from '../../Types';
 
-export default () => {
-  const [favorites, setFavorites] = useState([1, 2, 3]);
-  // const [isUserDataFetched, setUserDataFetched];
+type HomeProps = {
+  setUserData: (data: UserData) => void;
+};
+export default ({ setUserData }: HomeProps) => {
+  const [favorites, setFavorites] = useState<RecipeData[]>([]);
+  const [isUserDataFetched, setIsUserDataFetched] = useState(false);
   // TODO: fetch recipe data
-  // useEffect(() => {}, []);
+  useEffect(() => {
+    if (isUserDataFetched) return;
 
-  const recipeCards = favorites.map((el) => <RecipeCard key={el} />);
+    axios
+      .get('/api/user')
+      .then(({ data }) => {
+        setIsUserDataFetched(true);
+        setFavorites(data.favorites);
+        setUserData(data.userData);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
-  const getRecipes = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: hit api for recipe results
+  const removeFavorite = (recipeId: number): void => {
+    axios
+      .delete('/api/favorite', { data: recipeId })
+      .then(({ data }) => console.log(data))
+      .catch((err) => console.error(err));
   };
+
+  const recipeCards = favorites.map(({ id, title, image, sourceurl }) => (
+    <RecipeCard
+      key={`recipe-${id}`}
+      recipeId={id}
+      title={title}
+      image={image}
+      sourceurl={sourceurl}
+      type='favorite'
+      removeFavorite={() => removeFavorite(id)}
+    />
+  ));
 
   return (
     <section id='home'>

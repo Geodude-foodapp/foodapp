@@ -101,7 +101,7 @@ export default ({ formMode, logIn }: UserFormProps) => {
   return (
     <section id='user-form'>
       {formMode === 'Sign Up' && (
-        <h2> Create an account with Diet Bias</h2>
+        <h2> Start cooking with Diet Bias </h2>
       )}
       {formMode === 'Log In' &&(
         <h2> Log in to your account </h2>
